@@ -44,5 +44,11 @@ resource "aws_cloudfront_distribution" "web_distro" {
   }
 
   custom_error_response = "${var.custom_error_responses}"
-  restrictions          = "${var.restrictions}"
+
+  restrictions {
+    "geo_restriction" {
+      restriction_type = "${var.restriction_type}"
+      locations        = "${var.restriction_locations}"
+    }
+  }
 }

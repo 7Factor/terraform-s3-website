@@ -16,11 +16,6 @@ variable forward_query_strings {
   description = "Should we forward query strings?"
 }
 
-variable restrictions {
-  type        = "list"
-  description = "A restrictions block per the terraform docs on the cloudfront module."
-}
-
 variable cert_arn {
   description = "The ARN for a cert that will be fronting this distro. Make sure it exists."
 }
@@ -77,4 +72,15 @@ variable origin_default_ttl {
 variable origin_max_ttl {
   description = "Origin max TTL."
   default     = 86400
+}
+
+variable restriction_type {
+  description = "The restriction type for the CF distro when restricting content. Defaults to none."
+  default     = "none"
+}
+
+variable restriction_locations {
+  type        = "list"
+  description = "The list of locations to apply to the restriction type. Note this is ignored if the restriction type is none."
+  default     = []
 }
