@@ -17,6 +17,7 @@ variable forward_query_strings {
 }
 
 variable restrictions {
+  type        = "map"
   description = "A restrictions block per the terraform docs on the cloudfront module."
 }
 
