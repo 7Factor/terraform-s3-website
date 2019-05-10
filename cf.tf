@@ -1,12 +1,3 @@
-# If the S3 bucket ever changes then we will rebuild the origin.
-resource "random_id" "s3_origin" {
-  keepers = {
-    primary_fqdn = "${aws_s3_bucket.web.id}"
-  }
-
-  byte_length = 8
-}
-
 resource "aws_cloudfront_origin_access_identity" "access_id" {
   comment = "Created to facilitate CF access to ${var.primary_fqdn} and the corresponding bucket."
 }
@@ -20,7 +11,7 @@ resource "aws_cloudfront_distribution" "web_distro" {
 
   origin {
     domain_name = "${aws_s3_bucket.web.bucket_regional_domain_name}"
-    origin_id   = "${random_id.s3_origin.hex}"
+    origin_id   = "${var.s3_origin_id}"
 
     s3_origin_config {
       origin_access_identity = "${aws_cloudfront_origin_access_identity.access_id.id}"
@@ -35,7 +26,7 @@ resource "aws_cloudfront_distribution" "web_distro" {
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD", "OPTIONS"]
     cached_methods         = ["GET", "HEAD"]
-    target_origin_id       = "s3web-${random_id.s3_origin.hex}"
+    target_origin_id       = "${var.s3_origin_id}"
     viewer_protocol_policy = "redirect-to-https"
 
     forwarded_values {

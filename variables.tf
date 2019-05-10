@@ -8,6 +8,10 @@ variable origins {
   description = "This is a list of domain names that will be passed into the CORS rule for the S3 bucket and the aliases list for cloud front. "
 }
 
+variable s3_origin_id {
+  description = "A unique name value to assign to the s3 origin in CF. Try not to change it much."
+}
+
 variable forward_query_strings {
   description = "Should we forward query strings?"
 }
