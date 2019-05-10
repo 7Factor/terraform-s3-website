@@ -1,0 +1,2 @@
+# S3 Website
+This is an opinionated module that deploys an S3 bucket and a corresponding CloudFront distribution. This is excellent for deploying modern SPAs in your favorite flavor of framework. See the variables file for documentation on how to use this.
