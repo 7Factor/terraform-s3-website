@@ -14,7 +14,7 @@ resource "aws_cloudfront_distribution" "web_distro" {
     origin_id   = "${var.s3_origin_id}"
 
     s3_origin_config {
-      origin_access_identity = "${aws_cloudfront_origin_access_identity.access_id.id}"
+      origin_access_identity = "${aws_cloudfront_origin_access_identity.access_id.cloudfront_access_identity_path}"
     }
   }
 
