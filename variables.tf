@@ -1,14 +1,4 @@
 # Required variables
-variable web_index {
-  description = "The path to the file where your app will deploy it's entrypoint."
-  default     = "index.html"
-}
-
-variable web_error {
-  description = "The path to any custom error files that S3 will serve if there's a problem."
-  default     = "error.html"
-}
-
 variable primary_fqdn {
   description = "This is what we will name the S3 bucket. This must be in the list of DNS names that the app will be served from otherwise this won't work correctly."
 }
@@ -31,6 +21,16 @@ variable cert_arn {
 }
 
 # Optional variables
+variable web_index {
+  description = "The path to the file where your app will deploy it's entrypoint."
+  default     = "index.html"
+}
+
+variable web_error {
+  description = "The path to any custom error files that S3 will serve if there's a problem."
+  default     = "error.html"
+}
+
 variable cors_max_age_seconds {
   description = "Max age for a CORS call in seconds. Assigned to the cors rules for the S3 bucket."
   default     = 3000
