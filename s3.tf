@@ -16,6 +16,8 @@ resource "aws_s3_bucket" "web" {
     max_age_seconds = "${var.cors_max_age_seconds}"
   }
 
+  routing_rules = "${var.routing_rules}"
+
   policy = <<EOF
 {
     "Version": "2012-10-17",

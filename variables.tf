@@ -21,6 +21,11 @@ variable cert_arn {
 }
 
 # Optional variables
+variable routing_rules {
+  description = "A string containing a compatible policy document with routing rules to assign to the S3 bucket. Defaults to empty."
+  default     = ""
+}
+
 variable web_index {
   description = "The path to the file where your app will deploy it's entrypoint."
   default     = "index.html"
