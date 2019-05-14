@@ -26,12 +26,12 @@ variable routing_rules {
   default     = ""
 }
 
-variable web_index {
+variable web_index_doc {
   description = "The path to the file where your app will deploy it's entrypoint."
   default     = "index.html"
 }
 
-variable web_error {
+variable web_error_doc {
   description = "The path to any custom error files that S3 will serve if there's a problem."
   default     = "error.html"
 }
