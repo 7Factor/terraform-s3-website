@@ -6,9 +6,9 @@ resource "aws_s3_bucket" "web" {
   website {
     index_document = "${var.web_index_doc}"
     error_document = "${var.web_error_doc}"
-  }
 
-  routing_rules = "${var.routing_rules}"
+    routing_rules = "${var.routing_rules}"
+  }
 
   cors_rule {
     allowed_headers = ["*"]
