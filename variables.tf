@@ -47,10 +47,10 @@ variable "cors_expose_headers" {
   default     = []
 }
 
-variable "custom_error_response_map" {
-  type        = map(any)
-  description = "A map of custom error response arguments. You probably won't need this unless you have a complex deployment. Please look to the docs for more information."
-  default     = {}
+variable "custom_error_responses" {
+  type        = list(string)
+  description = "A list of custom error response blocks. You probably won't need this unless you have a complex deployment."
+  default     = []
 }
 
 variable "forward_cookies" {
