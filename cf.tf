@@ -45,9 +45,9 @@ resource "aws_cloudfront_distribution" "web_distro" {
 
   custom_error_response {
     error_caching_min_ttl = lookup(var.custom_error_response_map, "error_caching_min_ttl", "")
-    error_code = lookup(var.custom_error_response_map, "error_code", 404)
-    response_code = lookup(var.custom_error_response_map, "response_code", 404)
-    response_page_path = lookup(var.custom_error_response_map, "response_page_path", "")
+    error_code            = lookup(var.custom_error_response_map, "error_code", 404)
+    response_code         = lookup(var.custom_error_response_map, "response_code", 404)
+    response_page_path    = lookup(var.custom_error_response_map, "response_page_path", "")
   }
 
   restrictions {
