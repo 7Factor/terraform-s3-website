@@ -1,21 +1,21 @@
 resource "aws_s3_bucket" "web" {
-  bucket = "${var.primary_fqdn}"
+  bucket = var.primary_fqdn
 
   acl = "public-read"
 
   website {
-    index_document = "${var.web_index_doc}"
-    error_document = "${var.web_error_doc}"
+    index_document = var.web_index_doc
+    error_document = var.web_error_doc
 
-    routing_rules = "${var.routing_rules}"
+    routing_rules = var.routing_rules
   }
 
   cors_rule {
     allowed_headers = ["*"]
     allowed_methods = ["GET", "HEAD"]
-    allowed_origins = "${var.origins}"
-    expose_headers  = "${var.cors_expose_headers}"
-    max_age_seconds = "${var.cors_max_age_seconds}"
+    allowed_origins = var.origins
+    expose_headers  = var.cors_expose_headers
+    max_age_seconds = var.cors_max_age_seconds
   }
 
   policy = <<EOF
@@ -43,4 +43,6 @@ resource "aws_s3_bucket" "web" {
     ]
 }
 EOF
+
 }
+
