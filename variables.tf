@@ -48,7 +48,7 @@ variable "cors_expose_headers" {
 }
 
 variable "custom_error_responses" {
-  type        = list(string)
+  type        = list(any)
   description = "A list of custom error response blocks. You probably won't need this unless you have a complex deployment."
   default     = []
 }
