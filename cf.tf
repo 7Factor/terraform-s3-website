@@ -52,10 +52,10 @@ resource "aws_cloudfront_distribution" "web_distro" {
     }]
 
     content {
-      error_caching_min_ttl = custom_error_response.error_caching_min_ttl
-      error_code            = custom_error_response.error_code
-      response_code         = custom_error_response.response_code
-      response_page_path    = custom_error_response.response_page_path
+      error_caching_min_ttl = custom_error_response.value.error_caching_min_ttl
+      error_code            = custom_error_response.value.error_code
+      response_code         = custom_error_response.value.response_code
+      response_page_path    = custom_error_response.value.response_page_path
     }
   }
 
@@ -66,4 +66,3 @@ resource "aws_cloudfront_distribution" "web_distro" {
     }
   }
 }
-
