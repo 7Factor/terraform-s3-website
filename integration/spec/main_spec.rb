@@ -2,6 +2,7 @@ require 'awspec'
 require 'hcl/checker'
 
 TFVARS = HCL::Checker.parse(File.open('testing.tfvars').read())
+ENVVARS = eval(ENV['KITCHEN_KITCHEN_TERRAFORM_OUTPUTS'])
 
 describe s3_bucket(TFVARS['primary_fqdn']) do
   it { should exist }
@@ -25,7 +26,7 @@ describe s3_bucket(TFVARS['primary_fqdn']) do
         max_age_seconds: TFVARS['cors_max_age_seconds'] || 3000
     )
   }
-  
+
   it {
     should have_policy <<-POLICY
     {
@@ -35,7 +36,7 @@ describe s3_bucket(TFVARS['primary_fqdn']) do
                 "Sid": "",
                 "Effect": "Allow",
                 "Principal": {
-                    "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E2FGOA1GNVRXQH"
+                    "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E1MAHJBRF4ZE9J"
                 },
                 "Action": "s3:GetObject",
                 "Resource": "arn:aws:s3:::#{TFVARS['primary_fqdn']}/*"
@@ -44,7 +45,7 @@ describe s3_bucket(TFVARS['primary_fqdn']) do
                 "Sid": "",
                 "Effect": "Allow",
                 "Principal": {
-                    "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E2FGOA1GNVRXQH"
+                    "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E1MAHJBRF4ZE9J"
                 },
                 "Action": "s3:ListBucket",
                 "Resource": "arn:aws:s3:::#{TFVARS['primary_fqdn']}"
@@ -52,5 +53,26 @@ describe s3_bucket(TFVARS['primary_fqdn']) do
         ]
     }
     POLICY
+  }
+end
+
+describe cloudfront_distribution(ENVVARS[:cf_domain][:value]) do
+  it { should exist }
+  it { should be_deployed }
+  logger = Logger.new(STDOUT)
+
+  logger.debug("test: #{ENVVARS}")
+
+  TFVARS['custom_error_responses'].each { |error|
+    it {
+      should have_custom_response_error_code(error['error_code'])
+        .error_caching_min_ttl(error['error_caching_min_ttl'])
+        .response_page_path(error['response_page_path'])
+        .response_code(error['response_code'])
+    }
+  }
+
+  it {
+    should have_origin(TFVARS['s3_origin_id'])
   }
 end
