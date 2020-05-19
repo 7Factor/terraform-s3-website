@@ -27,41 +27,11 @@ describe s3_bucket(TFVARS['primary_fqdn']) do
     )
   }
 
-  it {
-    should have_policy <<-POLICY
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "",
-                "Effect": "Allow",
-                "Principal": {
-                    "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E1MAHJBRF4ZE9J"
-                },
-                "Action": "s3:GetObject",
-                "Resource": "arn:aws:s3:::#{TFVARS['primary_fqdn']}/*"
-            },
-            {
-                "Sid": "",
-                "Effect": "Allow",
-                "Principal": {
-                    "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E1MAHJBRF4ZE9J"
-                },
-                "Action": "s3:ListBucket",
-                "Resource": "arn:aws:s3:::#{TFVARS['primary_fqdn']}"
-            }
-        ]
-    }
-    POLICY
-  }
 end
 
 describe cloudfront_distribution(ENVVARS[:cf_domain][:value]) do
   it { should exist }
   it { should be_deployed }
-  logger = Logger.new(STDOUT)
-
-  logger.debug("test: #{ENVVARS}")
 
   TFVARS['custom_error_responses'].each { |error|
     it {
