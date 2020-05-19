@@ -16,3 +16,4 @@ backend.tf
 Thumbs.db
 
 .kitchen
+testing.tfvars
