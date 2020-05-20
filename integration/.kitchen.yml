@@ -17,4 +17,4 @@ suites:
   - name: base
     verifier:
       patterns:
-      - ./**/*spec.rb
+      - ./**/*_spec.rb
