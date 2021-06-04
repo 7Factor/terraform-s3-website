@@ -90,3 +90,7 @@ variable "restriction_locations" {
   default     = []
 }
 
+variable "compress" {
+  description = "Whether to compress files from the CF distro"
+  default     = true
+}
