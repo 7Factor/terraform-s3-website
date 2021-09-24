@@ -90,3 +90,60 @@ variable "restriction_locations" {
   default     = []
 }
 
+# ordered cache behavior config
+variable "ordered_cache_behavior_enabled" {
+  description = "Enable or disable the ordred cache behavior."
+  default     = false
+}
+
+variable "ordered_cache_behavior_path_pattern" {
+  description = "The path pattern of the ordered cache behavior."
+}
+
+variable "ordered_cache_behavior_allowed_methods" {
+  description = "The allowed methods of the ordered cache behavior."
+}
+
+variable "ordered_cache_behavior_cached_methods" {
+  description = "The cached methods of the ordered cache behavior."
+}
+
+variable "ordered_cache_behavior_forwarded_values_query_string" {
+  description = "The forwarded values query string of the ordred cache behavior."
+}
+
+variable "ordered_cache_behavior_forwarded_values_cookies_forward" {
+  description = "The cookies for the forward values of the ordered cache behavior."
+}
+
+variable "ordered_cache_behavior_min_ttl" {
+  description = "The min ttl of the ordered cache behavior"
+}
+
+variable "ordered_cache_behavior_default_ttl" {
+  description = "The default ttl of the ordered cache behavior."
+}
+
+variable "ordered_cache_behavior_max_ttl" {
+  description = "The max ttl of the ordered cache behavior."
+}
+
+variable "ordered_cache_behavior_compress" {
+  description = "The compress value of the ordered cache behavior."
+}
+
+variable "ordered_cache_behavior_viewer_protocol_policy" {
+  description = "The viewer protocol policy of the ordered cache behavior."
+}
+
+variable "ordered_cache_behavior_lambda_function_association_event_type" {
+  description = "The event type for the lambda function of the ordered cache behavior."
+}
+
+variable "ordered_cache_behavior_lambda_function_association_include_body" {
+  description = "The include body for the lambda function of the orderded cache behavior"
+}
+
+variable "ordered_cache_behavior_lambda_function_association_lambda_arn" {
+  description = "The arn of the lambda function for the ordered cache behavior"
+}
