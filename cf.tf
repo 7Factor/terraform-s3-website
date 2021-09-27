@@ -38,6 +38,16 @@ resource "aws_cloudfront_distribution" "web_distro" {
       }
     }
 
+    dynamic "lambda_function_association" {
+      for_each = var.lambda_function_association_enabled[*]
+
+      content {
+        event_type   = var.lambda_function_association_event_type
+        include_body = var.lambda_function_association_include_body
+        lambda_arn   = var.lambda_function_association_lambda_arn
+      }
+    }
+
     min_ttl     = var.origin_min_ttl
     default_ttl = var.origin_default_ttl
     max_ttl     = var.origin_max_ttl
@@ -63,37 +73,6 @@ resource "aws_cloudfront_distribution" "web_distro" {
     geo_restriction {
       restriction_type = var.restriction_type
       locations        = var.restriction_locations
-    }
-  }
-
-  dynamic "ordered_cache_behavior" {
-    for_each = var.ordered_cache_behavior_enabled[*]
-
-    content {
-      path_pattern     = var.ordered_cache_behavior_path_pattern
-      allowed_methods  = var.ordered_cache_behavior_allowed_methods
-      cached_methods   = var.ordered_cache_behavior_cached_methods
-      target_origin_id = var.s3_origin_id
-
-      forwarded_values {
-        query_string = var.ordered_cache_forwarded_values_query_string
-
-        cookies {
-          forward = var.ordered_cache_forwarded_values_cookies_forward
-        }
-      }
-
-      min_ttl                = var.ordered_cache_behavior_min_ttl
-      default_ttl            = var.ordered_cache_behavior_default_ttl
-      max_ttl                = var.ordered_cache_behavior_max_ttl
-      compress               = var.ordered_cache_behavior_compress
-      viewer_protocol_policy = var.ordered_cache_behavior_viewer_protocol_policy
-
-      lambda_function_association {
-        event_type   = var.ordered_cache_behavior_lambda_function_association_event_type
-        include_body = var.ordered_cache_behavior_lambda_function_association_include_body
-        lambda_arn   = var.ordered_cache_behavior_lambda_function_association_lambda_arn
-      }
     }
   }
 }
