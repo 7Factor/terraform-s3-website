@@ -98,12 +98,15 @@ variable "lambda_function_association_enabled" {
 
 variable "lambda_function_association_event_type" {
   description = "The event type for the lambda function of the ordered cache behavior."
+  default     = "origin-response"
 }
 
 variable "lambda_function_association_include_body" {
   description = "The include body for the lambda function of the orderded cache behavior"
+  default     = false
 }
 
 variable "lambda_function_association_lambda_arn" {
   description = "The arn of the lambda function for the ordered cache behavior"
+  default     = ""
 }
