@@ -39,12 +39,12 @@ resource "aws_cloudfront_distribution" "web_distro" {
     }
 
     dynamic "lambda_function_association" {
-      for_each = var.lambda_function_association_enabled[*]
+      for_each = var.lambda_function_associations
 
       content {
-        event_type   = var.lambda_function_association_event_type
-        include_body = var.lambda_function_association_include_body
-        lambda_arn   = var.lambda_function_association_lambda_arn
+        event_type   = lambda_function_association.value["event_type"]
+        include_body = lambda_function_association.value["include_body"]
+        lambda_arn   = lambda_function_association.value["lambda_arn"]
       }
     }
 

@@ -91,22 +91,13 @@ variable "restriction_locations" {
 }
 
 # lambda_function_association config
-variable "lambda_function_association_enabled" {
-  description = "Enable or disable the lambda function association."
-  default     = false
-}
 
-variable "lambda_function_association_event_type" {
-  description = "The event type for the lambda function of the ordered cache behavior."
-  default     = "origin-response"
-}
-
-variable "lambda_function_association_include_body" {
-  description = "The include body for the lambda function of the orderded cache behavior"
-  default     = false
-}
-
-variable "lambda_function_association_lambda_arn" {
-  description = "The arn of the lambda function for the ordered cache behavior"
-  default     = ""
+variable "lambda_function_associations" {
+  default     = []
+  description = "A list of lambda function associations for ordered cache behavior"
+  type = list(object({
+    event_type   = string
+    include_body = bool
+    lambda_arn   = string
+  }))
 }
