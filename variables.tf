@@ -94,3 +94,15 @@ variable "compress" {
   description = "Whether to compress files from the CF distro"
   default     = true
 }
+
+# lambda_function_association config
+
+variable "lambda_function_associations" {
+  default     = []
+  description = "A list of lambda function associations for ordered cache behavior"
+  type = list(object({
+    event_type   = string
+    include_body = bool
+    lambda_arn   = string
+  }))
+}

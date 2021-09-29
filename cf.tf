@@ -38,6 +38,16 @@ resource "aws_cloudfront_distribution" "web_distro" {
       }
     }
 
+    dynamic "lambda_function_association" {
+      for_each = var.lambda_function_associations
+
+      content {
+        event_type   = lambda_function_association.value["event_type"]
+        include_body = lambda_function_association.value["include_body"]
+        lambda_arn   = lambda_function_association.value["lambda_arn"]
+      }
+    }
+
     min_ttl     = var.origin_min_ttl
     default_ttl = var.origin_default_ttl
     max_ttl     = var.origin_max_ttl
