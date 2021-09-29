@@ -90,6 +90,11 @@ variable "restriction_locations" {
   default     = []
 }
 
+variable "compress" {
+  description = "Whether to compress files from the CF distro"
+  default     = true
+}
+
 # lambda_function_association config
 
 variable "lambda_function_associations" {

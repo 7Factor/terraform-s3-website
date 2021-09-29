@@ -51,6 +51,7 @@ resource "aws_cloudfront_distribution" "web_distro" {
     min_ttl     = var.origin_min_ttl
     default_ttl = var.origin_default_ttl
     max_ttl     = var.origin_max_ttl
+    compress    = var.compress
   }
 
   dynamic "custom_error_response" {
